@@ -48,3 +48,12 @@ Common methods:
 
 In machine learning, choosing between Label Encoding and One-Hot Encoding is crucial because using the wrong one can accidentally trick model into seeing patterns that aren not actually there.
 
+**Label Encoding**
+
+This method assigns each unique category a whole number (0, 1, 2, etc.). 
+- when to use: use this for ordinal data, where the categories have a natural rank or order (e.g., "junior"=0, "mid"=1, "senior"=2);
+- the risk: if we use this for non-ordered data (like apple and orange), the model might think orange (1) is greater than or better than apple (0), which is mathematically incorrect.
+
+**One-Hot Encoding**
+
+This method creates a new column for every category and uses "1" to indicate the presence of that category and "0" for the absence. 
