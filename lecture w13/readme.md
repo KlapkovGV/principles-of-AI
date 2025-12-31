@@ -57,3 +57,36 @@ This method assigns each unique category a whole number (0, 1, 2, etc.).
 **One-Hot Encoding**
 
 This method creates a new column for every category and uses "1" to indicate the presence of that category and "0" for the absence. 
+
+- when to use: use this for Nominal Data, where there is no inherent order (e.g., color: red, blue, green);
+- the risk: if we have hundreds of categories (like city's name), One-Hot Encoding will create hundreds of new columns, making dataset very large and slow to process.
+
+Which one should ne choose?
+- for ordered categories (small, medium, large) recommended method is label encoding;
+- for unordered categories (male, female) recommended method is one-hot encoding;
+- target variable (the "y" you are predicting) recommended method is label encoding;
+- high cardinality (too meny categories) recommended method is binary encoding.
+
+If we apply one-hot encoding to this categorical variable, we get:
+
+![onehot](https://github.com/user-attachments/assets/274edd31-84fc-4feb-bae3-36b7d72d0a7f)
+
+Note: however, notice that the data dimension has increased (new columns was created)! This is a situation we usually want to avoid. Applying this method to variables with a high number of categories can lead to a decline in the performance of our learning algorithm due to the curse of dimensionallity.
+
+**Dummy Encoding**
+
+Let's say we have a categorical variable like the following:
+```python
+import pandas as pd
+
+data = pd.DataFrame({'City': ['Delhi', 'Mumbai', 
+                             'Hyderabad', 'Chennai', 
+                             'Bangalore', 'Delhi', 
+                             'Hyderabad']})
+data
+```
+
+![output](https://github.com/user-attachments/assets/ebbc1e6b-14b2-4c55-af15-6669bbf9ca9f)
+
+In this state, the data is still in "text" format and cannot be used by a ml model until it is converted into numbers.
+
