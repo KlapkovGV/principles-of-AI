@@ -258,3 +258,15 @@ If the validation set remains too small, model evaluations mill not be accurate.
 
 ## k-Fold Cross-Validation
 
+An advanced technique for model evaluation called k-fold cross-validation, which solves the problem of having a validation set that is either too small or too big.
+- one way to solve this problem is to perform k-fold cross-validation using maby small validation sets;
+- the purpose of cross-validation is to test a machine learning model's ability to predict new data;
+- additionally, it is used to flag problems such as overfitting or selection bias and gives an idea of how the model will generalize to an independent dataset.
+
+How k-Fold cross-validation works:
+
+Instead of splitting the data once, the algorithm divides the training data into k equal parts (folds):
+1. Iteration: The model is trained k times;
+2. Rotation: In each round, different "fold" acts as the validation set while the remaining k-1 folds are used for training;
+3. Averaging: The final performance score is the average of all k rounds, providing a much more stable and reliable estimate of how well the model truly performs.
+
