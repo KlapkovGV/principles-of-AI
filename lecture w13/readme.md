@@ -202,3 +202,59 @@ Summary of above study path - machine learning pipeline
 3. Splitting: Separating data into training and test sets to check generalization;
 4. Training: An iterative process where the model learns (capture patterns) internal Parameters based on the Hyperparameters we set.
 
+**Concrete example of a hyperparameter using a Dicision Tree algorithm**
+
+What should the maximum allowed depth be for my Decision Tree algorithm?
+- Depth 0: The root node of the tree (e.g., petal length =< 2.45);
+- Depth 1: The first level of braches where data is split again;
+- Depth 2: The subsequent level of the tree.
+
+The maximum depth is a hyperparameter because we must decide how depp the tree is allowed to grow before the training starts.
+- if the tree is too shallow, it may be too simple to learn the data;
+- if it is too deep, it may overfit.
+
+![decision tree](https://github.com/user-attachments/assets/db9eaeac-e01d-43e8-bf1f-140f5fafe5c6)
+
+**How many neurons should we put in a neural network layer?**
+
+![neuralnetwork](https://github.com/user-attachments/assets/43a44a23-e45e-48a3-b245-0d2a34df8339)
+
+The number of neurons in each layer and the number of hidden layers themselves are hyperparameters. As the researcher, you must specify these external configurations before training starts. The model will then use these settings to estimate its internal parameters.
+
+**What should we set our learning rate to for the gradient descent algorithm?**
+
+The learning rate is a hyperparameter because it is an external setting you choose before training to control how quickly the model updates its internal parameters.
+
+![learningrate](https://github.com/user-attachments/assets/df253992-886c-49e7-b87b-ffabff759ef9)
+
+The three scenarios shown:
+1. too low:
+   - a small learning rate requires many updates before reaching the minimum point. The training process will be very slow and may get stuck before finding the optimal solution.
+2. just rigth:
+   - the optimal learning rate swiftly reaches the minimum point. Efficient training that finds the best parameters in a reasonable amount of time.
+3. too high:
+   - too large of a learning rate causes drastic update which lead to divergent behaviors. The model overshoots the minimum and bounces back and forh, failing to ever settle on an answer.
+  
+![learningrate1](https://github.com/user-attachments/assets/fb55b64c-1c8f-4d2e-88a3-ab33be3e6002)
+
+## Hyperparameter Tuning and Model Selection 
+
+Evaluating a model is easy. We simply use a test dataset. However, let's assume we are hesitating between two types of models. How can we decide between them? One ption is to train both models with the training data you have and compare how well they can generalize.
+
+When we have two different algorithms (for example, a Dicision Tree vs. a Neural Network), we need a fair way to see which one performs better on real-world data. As mentioned earlier, the test set acts as the final exam. If model A gets 90% accuracy on the test set and model B gets 85%, model A is generelly considered the better choice for generalization.
+
+**However, how do we choose the best hyperparameters for a model?**
+
+In this situation, we set aside a portion of our existing training data as a validation set; we then evaluate different candidate models on this dataset and choose the best one.
+
+Understanding the three-way split
+- training set is used to help the model estimate its internal paremeters (like weight);
+- validation set is used specifically to tune hyperparameters (like learning rate or tree depth);
+- test set is used only once at the end to estimate the final generalization error.
+
+In python, we can perform the training/test set split using the train_test_split function within the model_selection module of the Scikit-Learn library.
+
+If the validation set remains too small, model evaluations mill not be accurate. Consequently, we might select an inadequate model. Conversely, if we choose a very large validation set, then the ramaining training set will be much smaller than the full training set.
+
+## k-Fold Cross-Validation
+
