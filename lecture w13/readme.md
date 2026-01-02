@@ -90,3 +90,33 @@ data
 
 In this state, the data is still in "text" format and cannot be used by a ml model until it is converted into numbers.
 
+Dummy encoding is a variation of One-Hot encoding where we drop one of the columns (e.g., if you have n categories, you only keep n-1 columns) to avoid a situation where variables are highly correlated with each other.
+
+**Handling Missing Observations**
+
+Data we work with for learning purposes usually comes in the form of a dataset with pre-defined attributes.
+
+In datasets you may encounter in real life, the values of some attributes may be missing. This generally happens when the dataset is handmade and the person working on it forgets to fill in some values, or when they never measured them at all. Of course, there can be many other different reasins for the occurrence of missing observations.
+
+The approaches that can be used regarding missing observations depend on the type of problem. There is no single "best" way to deal with missing observations. It may be best to try several techniques, build several models, and choose the one that works.
+
+Once we have completed building the model and started the process of obtaining predictions, if our observation is not complete, we must use the same data imputation technique that we used to complete the training data to fill in the existing missing observation or observations.
+
+**Methods to Hadle Missing Observations**
+
+Replace the missing observation with a constant outside the fixed range of values, such as -999, -1, etc. Another technique is to replace the missing value with a value outside the range of values that an attribute can take. For example, if the normal range is [0, 1], we can set the missing value to 2 or -1.
+
+The idea here is for learning algorithm to learn what the best course of action is when the attribute has a value significantly different from the normal values. 
+
+Alternatively, you can reolace the missing value with a value in the middle of the range. For example, if the range of an attribute is [-1, 1], we can set the missing value to 0. The idea here is that a value in the middle of the range will not significantly affect the predictions.
+
+![missing values](https://github.com/user-attachments/assets/d144317c-1fa7-4aa6-997a-6df74de50abf)
+
+Replace with mean and median values: this simple imputation method treats each variable (column) separately and relies on ignoring any mutual relationship with other variables.
+- mean is suitable for continuous data that does not contain outliers;
+- median is suitable for continuous data that contains outliers;
+- cateforical attributes is for these, we can choose to fill missing values with the most common value.
+
+Note that mean, median, and mode assignment reduces any correlation between the imputed variable(s). This is because we assume there is no relationship between the imputed variable and other measured variables. Therefore, this imputation method has some attractive features for univariate analysis but becomes problematic for multivariate analysis.
+
+
