@@ -270,3 +270,16 @@ Instead of splitting the data once, the algorithm divides the training data into
 2. Rotation: In each round, different "fold" acts as the validation set while the remaining k-1 folds are used for training;
 3. Averaging: The final performance score is the average of all k rounds, providing a much more stable and reliable estimate of how well the model truly performs.
 
+Explaining the concept of 10-Fold Cross-Validation
+
+It is a common technique in machine learning used to assess how a model will generalize to an independent dataset.
+
+The formula calculates the Average Error (E) across all 10 folds:
+
+E = 1/10 sum(i=1)^10 E_i, where E_i represent the error for each specific iteration.
+
+Each model is evaluated once on all validation dataset after being trained on the rest of the data. By taking the average of all evaluations performed for the model, we obtain a much more accurate neasure of performance.
+
+![k-fold](https://github.com/user-attachments/assets/054c6890-761d-4479-a1ba-32d6944b7a78)
+
+
