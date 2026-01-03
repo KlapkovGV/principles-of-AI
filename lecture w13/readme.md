@@ -282,4 +282,80 @@ Each model is evaluated once on all validation dataset after being trained on th
 
 ![k-fold](https://github.com/user-attachments/assets/054c6890-761d-4479-a1ba-32d6944b7a78)
 
+For more information check the Scikit-Learn resource.
+
+## Cross-Validation for time series
+
+How can we perform cross-validation for time series? Instead of using standard k-fold cross-validation, we must note that a time series is not randomly distributed data by its nature, it is ordered according to chronological sequence. When data is not independent, cross-validation becomes more difficult because leaving out one observation does not remove all related information due to correlations with other observations.
+
+The proper way to perform time series cross-validation is rolling basis cross-validation, meaning you slide through the dataset. For example, 4-fold cross-validation is as follows:
+
+![k-folds1](https://github.com/user-attachments/assets/788189ed-cf8d-47b8-a062-734734787af4)
+
+Imagine we have a time series classification task. Start with a small subset of data for training purposes, make a forecast for the subsequent data points, and then calculate the accuracy rate for those forecasted data points. The same data points that were forecasted are later included as part of the next training data set, and forecasts are made for the subsequent data points.
+
+The accuracy rate of the forecasts is calculated by taking the average of the test sets. This method is called "Expanding Window Cross-Validation".
+
+![cross-validation1](https://github.com/user-attachments/assets/a9cbaed1-4e7b-4abb-b4cc-e97bd2ad32b1)
+
+## Hyperparameter Tuning and Model Selection
+
+We do not have to choose k=10. The standard value of k is 10 and it is used with appropriately sized data. For a very large dataset, a K value of 5 (K=5) can be used. An accurate estimate of the model's average performance is obtained in a way that reduces the cost of ditting the model to k-1 parts and evaluateing it on the k_th part. For very small dataset, the leave-one-out-cross-validation (also called LOOCV) technique is used. The validation data consist of only one observation.
+
+### Cross-Validation splitter classes from Scikit Learn's model_selection module in python
+
+Cross-Validation is a technique for assessing how well a machine learning model will generalize to new, unseen data. Instead of using a single train-test split, cross-validation divides our data into multiple subsets (folds) and trains/tests the model multiple times with different combinations.
+
+![cross-validation2](https://github.com/user-attachments/assets/d47afa27-2c56-44b7-8e39-f1bc8eac0d6e)
+
+The image lists various cross-validation strategies:
+
+K-Fold variant - split data into K equal parts, train on K-1, test on 1, rotating through all combination:
+- KFold - Stadndard K-fold;
+- RepeatedKFold - Repeats K-fold multiple times with different randomization;
+- StratifiedKFold - Maintains class distribution in each fold.
+
+Leave-One/P-Out - exhaustive methods where we leave out one or P samples for testing:
+- LeaveOneOut - Each sample becomes test set once;
+- LeavePOut - Leave P samples out each iteration.
+
+Group-based - ensures samples from the same group do not appear in both train and test:
+- GroupKFold, LeaveOneGroupOut, LeavePGroupsOut.
+
+Shuffle variants - add randomization:
+- ShuffleSplit - random train/test splits;
+- StratifiedShuffleSplit - Random splits preserving class distribution.
+
+Specialized:
+- TimeSeriesSplit - For temporal data (respects time ordering);
+- PredefinedSplit - Use your own predefined split indices.
+
+**Common methods used alongside Cross-Valiation for model selection and hyperparameter searching**
+
+In the literature, these are methods used with Cross-Validation for model selection and hyperparameter searching:
+- grid search;
+- random search;
+- bayesian optimization;
+- genetic algorithm;
+- partivle swarm optimization;
+- and maby other methods.
+
+### The importance of hyperparameters and the necessity od data spliting in modeling process
+
+The importance of hyperparameters lies in their ability to directly control the behavior of the training algorithm. Choosing appropriate hyperparameters play a very importante role in the performance of the trained model. It is importante to have three sets into which the data is divided: a training set, a test set, and a validation set. Therefore, hyperparameter tuning can be simply defined as the process of finding the best hyperparameter values of a learning algorithm that produces the best model.
+
+![hyperparam](https://github.com/user-attachments/assets/d799a513-ffe1-472b-9e9b-b8becf1c2c8a)
+
+## Testing Model
+
+After the final machine learning model has been trained, it is finally necessary to measure the performance of this model on a previously unseen dataset by performing a model acceptance test to estimate the generalization error. Here, we use the test set to evaluate the model before **delivering it to the customer** or **putting it into production**.
+
+## Model Evaluation Metrics
+
+So, which metrics are used when measuring model performance?
+- we consider different types of metrics to evaluate our models;
+- metric selection depends entirely on the type of model and the model's application plan;
+- evaluation metrics vary according to the purpose of the model;
+- different metrics are used depending on whether our model is a regression or a classification problem.
+
 
